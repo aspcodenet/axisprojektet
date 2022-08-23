@@ -3,15 +3,23 @@ package main
 import "fmt"
 
 func main() {
-	var name string
-	var age int
+	var val int
+	fmt.Println(`1. Skapa device
+2. Lista alla	
+3. Ändra device
+4. Sök
+5. Avsluta`)
 
-	fmt.Print("Vad heter du?")
-	fmt.Scanln(&name)
-	fmt.Print("Hur gammal är du?")
-	fmt.Scanln(&age)
+	fmt.Printf("Välj:")
+	fmt.Scanln(&val) // ref
 
-	fmt.Printf("Hej %s du är %d år\n", name, age)
+	fmt.Printf("Du valde: %d", val)
+
+	// fmt.Println("1. Skapa device")
+	// fmt.Println("2. Lista alla")
+	// fmt.Println("3. Ändra device")
+	// fmt.Println("4. Sök")
+	// fmt.Println("5. Avsluta")
 
 }
 
