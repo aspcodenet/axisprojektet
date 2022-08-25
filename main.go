@@ -12,48 +12,75 @@ func printMenu() {
 	fmt.Println("5. Avsluta")
 }
 
-/*
-[]string{"",""} funkar för mig. Kanske nytt i go?
-*/
+// // OOP ???
+// // hmmm... lets start with user defined types
+// // HockeyPlayer - name, age, jersey
+// type HockeyPlayer struct {
+// 	Name         string
+// 	Age          int
+// 	JerseyNumber int
+// 	PlayedGames  []Games
+// }
+// type Games struct {
+// }
+
+// func createPlayer() *HockeyPlayer {
+// 	var b = HockeyPlayer{
+// 		Name:         "tefsan",
+// 		Age:          12,
+// 		JerseyNumber: 123,
+// 	};
+// 	var c = HockeyPlayer{
+// 		Name:         "tefsan",
+// 		Age:          12,
+// 		JerseyNumber: 123,
+// 	};
+// 	return &c;
+
+// 	return &HockeyPlayer{
+// 		Name:         "tefsan",
+// 		Age:          12,
+// 		JerseyNumber: 123,
+// 	}
+// }
+// var p HockeyPlayer
+// p.Name = "Stefan"
+// p.Age = 123
+
+// var players []HockeyPlayer
+// players = append(players, p)
+
+// //var bestPlayer *HockeyPlayer
+//
+//	p2 := HockeyPlayer{
+//		Name:         "tefsan",
+//		Age:          12,
+//		JerseyNumber: 123,
+//	}
+type Device struct {
+	Name          string
+	Color         string
+	Manufacturer  string
+	WeightInGrams int
+	Test          map[string]interface{}
+}
 
 func main() {
+	var aa map[string]interface{}
+	aa = make(map[string]interface{})
+	aa["Hello"] = 12
+	aa["Hello2"] = 13
 
-	arr1 := [5]int{} //not initialized
+	var a int
+	a = 1
+	if a == 0 || a == 1 ||
+		a == 2 {
+		fmt.Println("sdadsasda")
 
-	arr2 := [5]int{1, 2}          //partially initialized
-	arr3 := [5]int{1, 2, 3, 4, 5} //fully initialized
-
-	fmt.Println(arr1)
-	arr1[1] = 12334
-	fmt.Println(arr2)
-	fmt.Println(arr3)
-
-	var cars = []string{"Volvo", "BMW", "Ford", "Mazda", "Renault"}
-	fmt.Println(cars[0])
-	fmt.Println(cars[1])
-
-	cars[3] = "Rolls Royce"
-
-	for index := 0; index < len(cars); index++ {
-		x := cars[index]
-		fmt.Println(x)
 	}
 
-	for index, carName := range cars {
-		if index == 0 {
-			fmt.Println("Detta är den första bilen")
-		}
-		fmt.Println(carName)
-	}
-
-	for _, carName := range cars {
-		fmt.Println(carName)
-	}
-
-	// var arr1 = [3]int{1,2,3}
-
-	// var spelare = [111]string{"Zlatan", "Fredrik Ljungberg"}
-
+	//	stackheap.Demo()
+	var devices []Device
 	for {
 		var val int
 		fmt.Printf("Välj:")
@@ -63,30 +90,69 @@ func main() {
 		case 5:
 			break
 		case 1:
-			createDevice()
+			newDevice := createDevice()
+			devices = append(devices, *newDevice)
 		case 2:
-			listAll()
+			listAll(&devices)
 		case 3:
-			changeDevice()
+			changeDevice(&devices)
 		case 4:
-			search()
+			search(&devices)
 		}
 		fmt.Printf("Du valde: %d", val)
 
 	}
 }
 
-func createDevice() {
+func createDevice() *Device {
+	var device Device
+
+	fmt.Println("*** Ny device ***")
+	fmt.Print("Namn:")
+	fmt.Scanln(&device.Name)
+	fmt.Print("Manufacturer:")
+	fmt.Scanln(&device.Manufacturer)
+	fmt.Print("Color:")
+	fmt.Scanln(&device.Color)
+	fmt.Print("Weight:")
+	fmt.Scanln(&device.WeightInGrams)
+
+	fmt.Println("*** Device added ***")
+	return &device
 
 }
 
-func listAll() {
+func listAll(devices *[]Device) {
+	fmt.Println("*** All our devices ***")
+	for _, device := range *devices {
+		fmt.Println(device)
+	}
 
 }
-func changeDevice() {
+func changeDevice(devices *[]Device) {
+	fmt.Println("*** Select one to modify ***")
+	for index, device := range *devices {
+		fmt.Printf("%d %s\n", index+1, device.Name)
+	}
+	sel := inputIntData(1, len(*devices)+1, "Ange vilken")
+	var name, manufacturer, color string
+	var weightInGrams int
+	fmt.Print("Namn:")
+	fmt.Scanln(&name)
+	fmt.Print("Manufacturer:")
+	fmt.Scanln(&manufacturer)
+	fmt.Print("Color:")
+	fmt.Scanln(&color)
+	fmt.Print("Weight:")
+	fmt.Scanln(&weightInGrams)
+
+	(*devices)[sel].Name = name
+	(*devices)[sel].Manufacturer = manufacturer
+	(*devices)[sel].Color = color
+	(*devices)[sel].WeightInGrams = weightInGrams
 
 }
-func search() {
+func search(devices *[]Device) {
 
 }
 
