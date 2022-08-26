@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"main/banking"
+	"main/concurrency"
 	"main/dinner"
 	"main/printing"
 	"net/http"
@@ -135,6 +136,8 @@ func getSingleDevice(c echo.Context) error {
 }
 
 func main() {
+	concurrency.RunDemo()
+	return
 	restApi()
 	//fmt.Println("Hejhej")
 	dbTest()
