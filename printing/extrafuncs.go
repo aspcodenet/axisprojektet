@@ -7,7 +7,7 @@ import (
 )
 
 func (ps *PrintSettings) OurPrint(txt string) {
-	if !ps.SnyggPrint {
+	if !ps.snyggPrint {
 		fmt.Println(txt)
 		return
 	}
