@@ -5,9 +5,11 @@ import (
 	"main/banking"
 	"main/dinner"
 	"main/printing"
+	"net/http"
 	"strings"
 
 	"github.com/glebarez/sqlite"
+	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )
 
@@ -112,7 +114,28 @@ func (dev *Device) IsBeautiful() bool {
 	return false
 }
 
+func restApi() {
+	//Vi ska skapa ett "rest"-API som
+	//svarar på HTTP GET /devices och listar alla som JSON
+	//Att göra HTTP POST/PUT/DELETE = inte idag men ni kommer
+	// se = enkelt
+	webServer := echo.New()
+	webServer.GET("/devices", getAllDevices)
+	webServer.GET("/devices/:id", getSingleDevice)
+	go webServer.Start(":8080")
+}
+func getAllDevices(c echo.Context) error {
+	//c.JSON
+	return c.String(http.StatusOK, "Alla")
+}
+func getSingleDevice(c echo.Context) error {
+	id := c.Param("id")
+	//c.JSON()
+	return c.String(http.StatusOK, "Hej hej"+id)
+}
+
 func main() {
+	restApi()
 	//fmt.Println("Hejhej")
 	dbTest()
 	dinner.Run()
