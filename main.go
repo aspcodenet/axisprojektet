@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"main/printing"
+	"strings"
 )
 
 func printMenu() {
@@ -65,11 +67,42 @@ type Device struct {
 	Test          map[string]interface{}
 }
 
+func IsBeautiful(dev *Device) bool {
+	if dev.Color == "Green" || dev.Color == "Yellow" {
+		return true
+	}
+	return false
+}
+
+func (dev *Device) IsBeautiful() bool {
+	if dev.Color == "Green" || dev.Color == "Yellow" {
+		return true
+	}
+	return false
+}
+
 func main() {
-	var aa map[string]interface{}
-	aa = make(map[string]interface{})
-	aa["Hello"] = 12
-	aa["Hello2"] = 13
+	ps := printing.New(false, false)
+	ps.OurPrint("2342343")
+	dev := &Device{Name: "wadd", Color: "Green"}
+
+	//if IsBeautiful(dev) {
+	if dev.IsBeautiful() {
+		fmt.Println("Fin device")
+	}
+
+	var aaaa string
+	aaaa = "dadadasda"
+	if strings.Contains(aaaa, "sada") == true {
+
+	}
+
+	var aa map[string]int
+	aa = make(map[string]int)
+	aa["555555-1122"] = 12
+	aa["720803-1111"] = 13
+
+	fmt.Println(aa["720803-7833"])
 
 	var a int
 	a = 1
