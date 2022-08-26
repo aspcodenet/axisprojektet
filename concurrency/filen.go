@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+func Run4() int {
+	return 23
+}
+
 func Calculate3(workChannel chan string, result chan string) {
 	for {
 		nextJob := <-workChannel
